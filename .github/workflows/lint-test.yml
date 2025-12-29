@@ -1,0 +1,40 @@
+name: Run Tests and Lint Files
+on:
+  push:
+    branches:
+      - featurs/dollar-exchange-rate
+jobs:
+  test-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📝 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎨 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 👷 Install server dependencies
+        working-directory: server
+        run: npm install
+
+      - name: 🎉 Install client dependencies
+        working-directory: client
+        run: npm install
+
+      - name: 🚀 Run client Tests
+        working-directory: client
+        run: npm test
+
+      - name: 🚚 Run server Tests
+        working-directory: server
+        run: npm test
+
+      - name: 🏗️ Run server Linter
+        working-directory: server
+        run: npm run lint
+
+      - name: ✈️ Run client Linter
+        working-directory: client
+        run: npm run lint
