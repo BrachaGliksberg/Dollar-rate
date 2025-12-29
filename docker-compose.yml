@@ -1,35 +1,35 @@
 services:
-  # app:
-  #   build: 
-  #     context: ./server
-  #     dockerfile: Dockerfile
-  #   env_file:
-  #     - .env
-  #     - server/.env
-  #   ports:
-  #     - "${SERVER_PORT}:${SERVER_PORT}"
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   environment:
-  #     NODE_TLS_REJECT_UNAUTHORIZED: "0"
+  app:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+      - server/.env
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
 
-  # db:
-  #   image: postgres:15
-  #   environment:
-  #     POSTGRES_USER: ${DB_USER}
-  #     POSTGRES_PASSWORD: ${DB_PASSWORD}
-  #     POSTGRES_DB: ${DB_NAME}
-  #   env_file: .env
-  #   ports:
-  #     - "${DB_PORT}:${DB_PORT}"
-  #   volumes:
-  #     - ./server/src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-  #   healthcheck:
-  #    test: ["CMD-SHELL", "pg_isready -U postgres"]
-  #    interval: 5s
-  #    timeout: 5s
-  #    retries: 5
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    env_file: .env
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - ./server/src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+     test: ["CMD-SHELL", "pg_isready -U postgres"]
+     interval: 5s
+     timeout: 5s
+     retries: 5
 
   client:
     build:
@@ -39,3 +39,5 @@ services:
       - "${CLIENT_PORT}:${CLIENT_PORT}" 
     env_file:
       - client/.env
+    depends_on:
+      - app

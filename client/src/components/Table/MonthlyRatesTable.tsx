@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addForecast } from "../../utils/calculations/forecast";
+import  addForecast  from "../../utils/calculations/forecast";
 import { ExchangeRate } from "../../types/exchangeRate";
 import { getRateColor } from "../../utils/ui/getRateColor";
 import "./Table.css";
