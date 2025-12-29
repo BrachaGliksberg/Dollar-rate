@@ -19,7 +19,6 @@ As well as the multiplication of matrices to show deviation
 ├── client
 │   ├── src
 │   │   ├── api
-│   │   │   └── fetchExchangeRates.test.ts
 │   │   │   └── fetchExchangeRates.ts
 │   │   ├── components
 │   │   │   ├── Dashboard
